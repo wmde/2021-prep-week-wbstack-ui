@@ -5,6 +5,11 @@
 npm install
 ```
 
+Create an environment file and modify it accordingly.
+```
+cp .env.example .env
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
