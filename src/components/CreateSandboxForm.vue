@@ -7,11 +7,11 @@
 
 		<v-dialog v-model="showSuccessDialog" max-width="500">
 			<v-card>
-				<v-card-title class="headline grey lighten-2">
+				<v-card-title class="overline success lighten-2">
 					Success!
 				</v-card-title>
-				<v-card-text>
-					Success! You can now sign in to your Wikibase sandbox: <a :href="signInLink">{{ signInLink }}</a>
+				<v-card-text class="pt-4">
+					You created a new Wikibase! Here is your sign in link: <a :href="signInLink">{{ signInLink }}</a>
 				</v-card-text>
 			</v-card>
 		</v-dialog>
