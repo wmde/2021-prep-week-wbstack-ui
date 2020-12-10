@@ -55,4 +55,4 @@ jobs:
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
         env:
-          VUE_APP_API_URL: https://api.wikibase.cloud
+          VUE_APP_API_URL: https://www.wikibase.cloud/api
