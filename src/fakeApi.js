@@ -10,7 +10,10 @@ export function fakeApi() {
 
 			this.post( '/sandbox/create', () => {
 				return {
-					signInLink: 'https://pink-fluffy-unicorns.wikibase.cloud/?admin=yes', // TODO return something more sensible?
+					success: 1,
+					data: {
+						domain: 'pink-fluffy-unicorns.wikibase.cloud',
+					}
 				};
 			} );
 		},

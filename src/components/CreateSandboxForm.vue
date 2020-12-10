@@ -15,6 +15,17 @@
 				</v-card-text>
 			</v-card>
 		</v-dialog>
+
+		<v-dialog v-model="showFailureDialog" max-width="500">
+			<v-card>
+				<v-card-title class="overline error lighten-2">
+					Failure!
+				</v-card-title>
+				<v-card-text class="pt-4">
+					Could not create a Wikibase Sandbox at this time...
+				</v-card-text>
+			</v-card>
+		</v-dialog>
 	</v-form>
 </template>
 
@@ -26,6 +37,7 @@ export default {
 		return {
 			signInLink: null,
 			showSuccessDialog: false,
+			showFailureDialog: false,
 		}
 	},
 
@@ -36,8 +48,9 @@ export default {
 				body: JSON.stringify( {} ), // recaptcha goes here?
 			} ) ).json();
 
-			this.signInLink = response.signInLink;
-			this.showSuccessDialog = true;
+			this.signInLink = "https://" + response.data.domain;
+			this.showSuccessDialog = response.success;
+			this.showFailureDialog = !response.success;
 		},
 	}
 }
