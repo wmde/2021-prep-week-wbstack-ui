@@ -1,4 +1,4 @@
-import { createServer } from 'miragejs'
+import { createServer, Response } from 'miragejs'
 
 /**
  * Fake API for development
@@ -9,13 +9,17 @@ export function fakeApi() {
 			this.urlPrefix = process.env.VUE_APP_API_URL;
 
 			this.post( '/sandbox/create', () => {
-				return {
+				return new Response( 200, {}, {
 					success: 1,
 					data: {
 						domain: 'pink-fluffy-unicorns.wikibase.cloud',
 					}
-				};
+				} );
 			} );
+
+			// this.post( '/sandbox/create', () => {
+			// 	return new Response( 500, {}, 'sadness' );
+			// } );
 		},
 	} );
 }

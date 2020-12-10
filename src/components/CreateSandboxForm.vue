@@ -42,15 +42,18 @@ export default {
 	},
 
 	methods: {
-		async createSandbox() {
-			const response = await ( await fetch( `${ process.env.VUE_APP_API_URL }/sandbox/create`, {
+		createSandbox() {
+			fetch( `${ process.env.VUE_APP_API_URL }/sandbox/create`, {
 				method: 'POST',
 				body: JSON.stringify( {} ), // recaptcha goes here?
-			} ) ).json();
-
-			this.signInLink = "https://" + response.data.domain;
-			this.showSuccessDialog = response.success;
-			this.showFailureDialog = !response.success;
+			} ).then( ( response ) => {
+				return response.json();
+			} ).then( ( responseJson ) => {
+				this.signInLink = 'https://' + responseJson.data.domain;
+				this.showSuccessDialog = responseJson.success;
+			} ).catch( () => {
+				this.showFailureDialog = true;
+			} );
 		},
 	}
 }
