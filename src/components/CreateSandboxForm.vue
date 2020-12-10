@@ -1,7 +1,6 @@
 <template>
 	<v-form>
-		<!-- recaptcha goes somewhere here -->
-		<v-btn color="primary" elevation="2" x-large @click="createSandbox">
+		<v-btn color="primary" elevation="2" x-large @click="recaptchaAndCreateSandbox">
 			Create a new Wikibase sandbox!
 		</v-btn>
 
@@ -42,10 +41,17 @@ export default {
 	},
 
 	methods: {
-		createSandbox() {
+		async recaptchaAndCreateSandbox() {
+			await this.$recaptchaLoaded();
+			const token = await this.$recaptcha( 'createSandbox' );
+
+			this.createSandbox( token );
+		},
+
+		createSandbox( recaptcha ) {
 			fetch( `${ process.env.VUE_APP_API_URL }/sandbox/create`, {
 				method: 'POST',
-				body: JSON.stringify( {} ), // recaptcha goes here?
+				body: JSON.stringify( { recaptcha } ),
 			} ).then( ( response ) => {
 				return response.json();
 			} ).then( ( responseJson ) => {
