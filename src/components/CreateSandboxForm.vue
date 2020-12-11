@@ -26,10 +26,10 @@
 					</v-col>
 
 					<v-col>
-						<v-radio value="pokemon">
+						<v-radio value="pokemon" disabled>
 							<template v-slot:label>
-								<v-card width="100%" height="100%">
-									<v-card-title>Pokemon</v-card-title>
+								<v-card width="100%" height="100%" color="grey lighten-4">
+									<v-card-title>Pokemon (coming soon)</v-card-title>
 									<v-card-text>The first 151. Gotta catch 'em all!</v-card-text>
 								</v-card>
 							</template>
