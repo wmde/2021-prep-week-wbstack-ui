@@ -51,6 +51,9 @@ export default {
 		createSandbox( recaptcha ) {
 			fetch( `${ process.env.VUE_APP_API_URL }/sandbox/create`, {
 				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
 				body: JSON.stringify( { recaptcha } ),
 			} ).then( ( response ) => {
 				return response.json();
