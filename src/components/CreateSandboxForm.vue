@@ -1,5 +1,44 @@
 <template>
 	<v-form>
+		<v-radio-group v-model="dataSet">
+			<v-container>
+				<v-row>
+					<v-col>
+						<v-radio value="empty">
+							<template v-slot:label>
+								<v-card width="100%" height="100%">
+									<v-card-title>Empty</v-card-title>
+									<v-card-text>An empty Wikibase that you can fill with data yourself!</v-card-text>
+								</v-card>
+							</template>
+						</v-radio>
+					</v-col>
+
+					<v-col>
+						<v-radio value="library">
+							<template v-slot:label>
+								<v-card width="100%" height="100%">
+									<v-card-title>Library data</v-card-title>
+									<v-card-text>A collection of books and authors</v-card-text>
+								</v-card>
+							</template>
+						</v-radio>
+					</v-col>
+
+					<v-col>
+						<v-radio value="pokemon">
+							<template v-slot:label>
+								<v-card width="100%" height="100%">
+									<v-card-title>Pokemon</v-card-title>
+									<v-card-text>The first 151. Gotta catch 'em all!</v-card-text>
+								</v-card>
+							</template>
+						</v-radio>
+					</v-col>
+				</v-row>
+			</v-container>
+		</v-radio-group>
+
 		<v-btn color="primary" elevation="2" x-large @click="recaptchaAndCreateSandbox">
 			Create a new Wikibase sandbox!
 		</v-btn>
@@ -34,6 +73,7 @@ export default {
 
 	data() {
 		return {
+			dataSet: 'empty',
 			signInLink: null,
 			showSuccessDialog: false,
 			showFailureDialog: false,
@@ -54,7 +94,10 @@ export default {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify( { recaptcha } ),
+				body: JSON.stringify( {
+					recaptcha,
+					dataSet: this.dataSet,
+				} ),
 			} ).then( ( response ) => {
 				return response.json();
 			} ).then( ( responseJson ) => {
